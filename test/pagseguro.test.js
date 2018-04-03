@@ -31,7 +31,7 @@ describe('PagSeguro Library', () => {
 
     it('shoud received correct URL', () => {
       let pagseguro = new PagSeguro('teste', 'token')
-      expect(pagseguro.url).to.be.equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
+      expect(pagseguro.url).to.be.equal('https://ws.sandbox.pagseguro.uol.com.br/v1/')
 
       let pagseguro2 = new PagSeguro('teste', 'token', 'production')
       expect(pagseguro2.url).to.be.equal('https://ws.pagseguro.uol.com.br/v2/')
