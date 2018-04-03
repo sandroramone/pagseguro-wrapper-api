@@ -4,7 +4,7 @@
   "description": "Library for working with pagseguro",
   "main": "index.js",
   "scripts": {
-    "precommit": "npm run lint & npm test",
+    "precommit": "npm run lint && npm test",
     "clear": "rimraf lib",
     "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
     "build:watch": "npm run build -- --watch",
