@@ -32,12 +32,6 @@ describe('Transaction Library', () => {
     it('should create an instace of Transaction', () => expect(transaction)
       .to.be.an.instanceof(Transaction))
 
-    it('should replace default url', () => {
-      transaction.setUrl('v3')
-      expect(transaction.url).to.be
-        .equal('https://ws.sandbox.pagseguro.uol.com.br/v3/')
-    })
-
     it('should get session on pagseguro', () => {
       promise.resolves(`
             <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
@@ -149,7 +143,38 @@ describe('Transaction Library', () => {
             .equal('https://sualoja.com.br/notifica.html')
     })
 
-    it('should ')
+    it('should set url vresion correct', () => {
+      expect(transaction.url).to.be
+        .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
+
+      transaction.setUrlVersion('v3')
+      expect(transaction.url).to.be
+        .equal('https://ws.sandbox.pagseguro.uol.com.br/v3/')
+
+      transaction.setUrlVersion()
+      expect(transaction.url).to.be
+        .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
+
+      transaction.setModeUrl('production')
+      expect(transaction.url).to.be
+        .equal('https://ws.pagseguro.uol.com.br/v2/')
+      
+      transaction.setUrlVersion('v3')
+      expect(transaction.url).to.be
+        .equal('https://ws.pagseguro.uol.com.br/v3/')
+
+    })
+
+    it('should trade mode url', () => {
+      transaction.setModeUrl('production')
+      expect(transaction.url).to.be
+        .equal('https://ws.pagseguro.uol.com.br/v2/')
+
+      transaction.setModeUrl()
+      expect(transaction.url).to.be
+        .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
+
+    })
 
   })
 

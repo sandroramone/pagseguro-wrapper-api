@@ -31,8 +31,13 @@ class Transaction extends PagSeguro {
    * @param {string} [v='v2'] - version api url for requisition, example 'v3',
    * default value is 'v2'
    */
-  setUrl(v = 'v2') {
+  setUrlVersion(v = 'v2') {
     this.url = `${this.mode == 'sandbox' ? sandbox : production}${v}/`
+  }
+
+  setModeUrl(mode = 'sandbox') {
+    this.mode = mode
+    this.setUrlVersion(this.url.substr(this.url.length - 3, 2))
   }
 
   /**
