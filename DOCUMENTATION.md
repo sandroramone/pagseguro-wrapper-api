@@ -35,7 +35,8 @@ class Transaction represent the transaction pagseguro api endpoint
 
 * [Transaction](#Transaction) ⇐ [<code>PagSeguro</code>](#PagSeguro)
     * [new Transaction(email, token, [url])](#new_Transaction_new)
-    * [.setUrl([v])](#Transaction+setUrl)
+    * [.setUrlVersion([v])](#Transaction+setUrlVersion)
+    * [.setModeUrl([mode])](#Transaction+setModeUrl)
     * [.getSession()](#Transaction+getSession) ⇒ <code>Promise</code>
     * [.addItem(item)](#Transaction+addItem)
     * [.setItems(items)](#Transaction+setItems)
@@ -52,11 +53,11 @@ class Transaction represent the transaction pagseguro api endpoint
 | --- | --- | --- | --- |
 | email | <code>string</code> |  | is email of account pagseguro, exemple vendor@email |
 | token | <code>string</code> |  | is token of account pagseguro, get the token in pagseguro configuration |
-| [url] | <code>string</code> | <code>&quot;&#x27;sandbox&#x27;&quot;</code> | is a type of url api, exemple 'sandbox' or 'production' |
+| [url] | <code>string</code> | <code>&quot;sandbox&quot;</code> | is a type of url api, exemple 'sandbox' or 'production' |
 
-<a name="Transaction+setUrl"></a>
+<a name="Transaction+setUrlVersion"></a>
 
-### transaction.setUrl([v])
+### transaction.setUrlVersion([v])
 setUrl
 set url for requisition in pagseguro api
 
@@ -64,7 +65,18 @@ set url for requisition in pagseguro api
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [v] | <code>string</code> | <code>&quot;&#x27;v2&#x27;&quot;</code> | version api url for requisition, example 'v3', default value is 'v2' |
+| [v] | <code>string</code> | <code>&quot;v2&quot;</code> | version api url for requisition, example 'v3', default value is 'v2' |
+
+<a name="Transaction+setModeUrl"></a>
+
+### transaction.setModeUrl([mode])
+setModeUrl
+
+**Kind**: instance method of [<code>Transaction</code>](#Transaction)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [mode] | <code>string</code> | <code>&quot;sandbox&quot;</code> | is trasaction mode, 'sandbox' for test or 'production' for production |
 
 <a name="Transaction+getSession"></a>
 

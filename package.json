@@ -4,6 +4,7 @@
   "description": "Library for working with pagseguro",
   "main": "index.js",
   "scripts": {
+    "documentation": "./node_modules/.bin/jsdoc -d ./Documentation src/*.js && ./node_modules/.bin/jsdoc2md src/*.js > DOCUMENTATION.md",
     "clear": "rimraf lib",
     "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
     "build:watch": "npm run build -- --watch",
@@ -50,7 +51,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm test"
+      "pre-commit": "npm run documentation && git add *.md && git add Documentation/* && npm run lint && npm test"
     }
   }
 }
