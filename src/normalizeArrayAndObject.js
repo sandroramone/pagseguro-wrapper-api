@@ -40,3 +40,4 @@ export const normalize = data => {
   else
     return normalizeObject(data)
 }
+

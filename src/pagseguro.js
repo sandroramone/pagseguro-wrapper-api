@@ -1,56 +1,26 @@
-import { sandbox, production } from './config'
-import { normalize } from './normalizeArrayAndObject'
-const { parseString } = require('xml2js')
+import { sandbox, production, version } from './config'
 
-global.fetch = require('node-fetch')
-
+/**
+ * class PagSeguro represent the basic config of account
+ */
 class PagSeguro {
-  constructor(email, token, url = 'sandbox', mode = 'payment') {
-    this.email = email
-    this.token = token
-    this.url = url == 'production' ? production : sandbox
-    this.mode = mode
-    this.xml = '<?xml version="1.0" encoding="UTF-8">'
-    this.transaction = {}
-  }
 
-  // set custom url for requisition, exeample api v3
-  setUrl(url) {
-    this.url = url
-  }
-
-  // parse xml to jsvascript object
-  parseXmlToObject(data, callback) {
-    parseString(data, { tim: true }, (err, res) => {
-      if(err)
-        callback(err)
-      else
-        callback(null, normalize(res))
-    })
-  }
-
-  // return a pagseguro session for transaction
-  getSession() {
-    return global.fetch(
-      `${this.url}sessions?email=${this.email}&token=${this.token}`,
-      { method: 'POST' }
-    ).then(data => data.json())
-  }
-
-  addItem(item) {
-    if(!this.transaction.items)
-      this.transaction.items = []
-
-    this.transaction.items = [...this.transaction.items, { item }]
-  }
-
-  setItems(items) {
-    this.transaction.items = [...items]
-  }
-
-  setBuyer(buyer) {
-    this.transaction.sender = buyer
-  }
+    /**
+     *
+     * @param {string} email is email of account pagseguro, exemple vendor@email
+     * @param {string} token is token of account pagseguro,
+     * get the token in pagseguro configuration
+     * @param {string} [url='sandbox'] is a type of url api,
+     * exemple 'sandbox' or 'production'
+     */
+    constructor(email, token, url = 'sandbox') {
+        this.email = email
+        this.token = token
+        this.mode = url
+        this.url = `${url == 'production' ? production : sandbox}${version}/`
+        this.xml = '<?xml version="1.0" encoding="UTF-8">'
+        this.transaction = {}
+    }
 }
 
 export { PagSeguro }

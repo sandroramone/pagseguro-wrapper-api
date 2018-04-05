@@ -1,7 +1,8 @@
 module.exports = {
     "env": {
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -40,7 +41,7 @@ module.exports = {
             "error",
             "never"
         ],
-        "class-methods-use-this": "off",
+        "class-methods-use-this": "error",
         "comma-dangle": "error",
         "comma-spacing": "off",
         "comma-style": "error",
@@ -102,7 +103,7 @@ module.exports = {
         "max-len": "error",
         "max-lines": "error",
         "max-nested-callbacks": "error",
-        "max-params": "off",
+        "max-params": "error",
         "max-statements": "error",
         "max-statements-per-line": "error",
         "multiline-comment-style": "error",
@@ -111,7 +112,10 @@ module.exports = {
             "always-multiline"
         ],
         "new-parens": "error",
-        "newline-after-var": "off",
+        "newline-after-var": [
+            "error",
+            "always"
+        ],
         "newline-before-return": "off",
         "newline-per-chained-call": "off",
         "no-alert": "error",
@@ -221,7 +225,7 @@ module.exports = {
         "padding-line-between-statements": "error",
         "prefer-arrow-callback": "error",
         "prefer-const": "off",
-        "prefer-destructuring": "off",
+        "prefer-destructuring": "error",
         "prefer-numeric-literals": "error",
         "prefer-promise-reject-errors": "error",
         "prefer-reflect": "off",
@@ -243,6 +247,7 @@ module.exports = {
         "semi": "off",
         "semi-spacing": "error",
         "semi-style": "error",
+        "sort-imports": "off",
         "sort-keys": "error",
         "sort-vars": "error",
         "space-before-blocks": "error",
@@ -275,7 +280,6 @@ module.exports = {
             "error",
             "never"
         ],
-        "valid-jsdoc": "error",
         "vars-on-top": "error",
         "wrap-iife": "error",
         "wrap-regex": "error",
