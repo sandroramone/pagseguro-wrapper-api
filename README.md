@@ -9,4 +9,4 @@ Project in progress, is not ready.
 
 ## Documentation
 
-documentation is in the directory ./Documentation in format html and [here Markdown](./DOCUMENTATION.md).
+documentation is in the directory ./Documentation in format html and [here Markdown](https://github.com/sandroramone/pagseguro-wrapper-api/blob/master/DOCUMENTATION.md).

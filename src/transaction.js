@@ -15,7 +15,7 @@ class Transaction extends PagSeguro {
    * @param {string} email is email of account pagseguro, exemple vendor@email
    * @param {string} token is token of account pagseguro,
    * get the token in pagseguro configuration
-   * @param {string} [url='sandbox'] is a type of url api,
+   * @param {string} [url=sandbox] is a type of url api,
    * exemple 'sandbox' or 'production'
    */
   constructor(email, token, url = 'sandbox') {
@@ -28,13 +28,19 @@ class Transaction extends PagSeguro {
    * setUrl
    * set url for requisition in pagseguro api
    *
-   * @param {string} [v='v2'] - version api url for requisition, example 'v3',
+   * @param {string} [v=v2] - version api url for requisition, example 'v3',
    * default value is 'v2'
    */
   setUrlVersion(v = 'v2') {
     this.url = `${this.mode == 'sandbox' ? sandbox : production}${v}/`
   }
 
+  /**
+   * setModeUrl
+   *
+   * @param {string} [mode=sandbox] - is trasaction mode,
+   * 'sandbox' for test or 'production' for production
+   */
   setModeUrl(mode = 'sandbox') {
     this.mode = mode
     this.setUrlVersion(this.url.substr(this.url.length - 3, 2))
@@ -58,7 +64,7 @@ class Transaction extends PagSeguro {
   /**
    * addItem
    *
-   * @param {object} item - item buy
+   * @param {item} item - item buy
    */
   addItem(item) {
     if(!this.transaction.items)
@@ -68,9 +74,18 @@ class Transaction extends PagSeguro {
   }
 
   /**
+   * @typedef item
+   * @type {Object}
+   * @property {string} id - id item
+   * @property {string} description - description of item
+   * @property {string} amount - unity cost
+   * @property {number} quantity - unity quantity
+   */
+
+  /**
    * setItems
    *
-   * @param {array} items - array of object item
+   * @param {item[]} items - array of object item
    */
   setItems(items) {
     this.transaction.items = [...items]
@@ -79,7 +94,7 @@ class Transaction extends PagSeguro {
   /**
    * setSender
    *
-   * @param {object} sender - representing a buyer
+   * @param {Object} sender - representing a buyer
    */
   setSender(sender) {
     this.transaction.sender = sender
@@ -88,7 +103,7 @@ class Transaction extends PagSeguro {
   /**
    * setShipping
    *
-   * @param {object} shipping - is a shipping of transaction
+   * @param {Object} shipping - is a shipping of transaction
    */
   setShipping(shipping) {
     this.transaction.shipping = shipping
@@ -112,6 +127,11 @@ class Transaction extends PagSeguro {
     this.transaction.currency = currency
   }
 
+  /**
+   * setNotificationUrl
+   *
+   * @param {string} url is your url for received notification of trasaction
+   */
   setNotificationUrl(url) {
     this.transaction.notificationURL = url
   }

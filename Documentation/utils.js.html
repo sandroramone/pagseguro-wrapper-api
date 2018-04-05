@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utils.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,40 +17,60 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utils.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>PagSeguro-node</h1><p><a href="https://travis-ci.org/sandroramone/pagseguro-wrapper-api"><img src="https://travis-ci.org/sandroramone/pagseguro-wrapper-api.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/sandroramone/pagseguro-wrapper-api?branch=master"><img src="https://coveralls.io/repos/github/sandroramone/pagseguro-wrapper-api/badge.svg?branch=master" alt="Coverage Status"></a>
-<a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT licensed"></a></p>
-<p>A wrapper to work with the <a href="https://dev.pagseguro.uol.com.br/referencia-da-api/api-de-pagamentos-pagseguro">PagSeguro Api</a>.</p>
-<p>Project in progress, is not ready.</p>
-<h2>Documentation</h2><p>documentation is in the directory ./Documentation in format html and <a href="https://github.com/sandroramone/pagseguro-wrapper-api/blob/master/DOCUMENTATION.md">here Markdown</a>.</p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module utils */
+import { normalize } from './normalizeArrayAndObject'
+import { parseString } from 'xml2js'
+
+/**
+ * typeOf
+ *
+ * @param {string} data is a data for type verification
+ * @returns {string} type of data
+ */
+const typeOf = data => {
+  if(typeof(data) === 'object')
+   return Object.prototype.toString.call(data)
+    .replace(/^\[object |\]$/g,'').toLowerCase()
+  return typeof(data)
+}
+
+/**
+ * parseXmlToObject
+ *
+ * @param {string} data xml for parse and transform in javascript object
+ * @param {callback} callback
+ */
+const parseXmlToObject = (data, callback) => {
+  parseString(data, { tim: true }, (err, res) => {
+    if(err)
+      callback(err)
+    else
+      callback(null, normalize(res))
+  })
+}
+
+/**
+ * this callback response an error and a result,
+ * result is a xml transformed in Object 
+ * @callback callback
+ * @param {Error} err
+ * @param {Object} res
+ */
+
+
+export { typeOf, parseXmlToObject }
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

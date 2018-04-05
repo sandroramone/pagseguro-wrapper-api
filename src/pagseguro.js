@@ -10,7 +10,7 @@ class PagSeguro {
      * @param {string} email is email of account pagseguro, exemple vendor@email
      * @param {string} token is token of account pagseguro,
      * get the token in pagseguro configuration
-     * @param {string} [url='sandbox'] is a type of url api,
+     * @param {string} [url=sandbox] is a type of url api,
      * exemple 'sandbox' or 'production'
      */
     constructor(email, token, url = 'sandbox') {

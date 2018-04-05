@@ -1,8 +1,10 @@
-import { TypeOf } from './utils'
+/** @module normalizeArrayAndObject */
 
-export const normalizeArray = array => {
+import { typeOf } from './utils'
+
+const normalizeArray = array => {
   let data = array.map(item => {
-    let type = TypeOf(item)
+    let type = typeOf(item)
 
     switch (type) {
       
@@ -22,7 +24,7 @@ export const normalizeArray = array => {
   return data.length > 1 ? data : data[0]
 }
 
-export const normalizeObject = data => {
+const normalizeObject = data => {
   for (let i in data) {
     if (Array.isArray(data[i])) {
       data[i] = normalizeArray(data[i])
@@ -33,11 +35,18 @@ export const normalizeObject = data => {
   return data
 }
 
-// normalize objects and array
-export const normalize = data => {
+/**
+ * normalize
+ *
+ * @param {Object} data is an object to be normalized
+ * @returns {Object} Object normalized,
+ * exemple { number: [1], name: ['Jhon'] } returns { number: 1, name: 'Jhon' }
+ */
+const normalize = data => {
   if (Array.isArray(data))
     return normalizeArray(data)
   else
     return normalizeObject(data)
 }
 
+export { normalize, normalizeObject, normalizeArray }

@@ -146,34 +146,32 @@ describe('Transaction Library', () => {
     it('should set url vresion correct', () => {
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
-
+      
       transaction.setUrlVersion('v3')
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v3/')
-
+      
       transaction.setUrlVersion()
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
-
+      
       transaction.setModeUrl('production')
       expect(transaction.url).to.be
         .equal('https://ws.pagseguro.uol.com.br/v2/')
       
       transaction.setUrlVersion('v3')
       expect(transaction.url).to.be
-        .equal('https://ws.pagseguro.uol.com.br/v3/')
-
+        .equal('https://ws.pagseguro.uol.com.br/v3/') 
     })
 
     it('should trade mode url', () => {
       transaction.setModeUrl('production')
       expect(transaction.url).to.be
         .equal('https://ws.pagseguro.uol.com.br/v2/')
-
+      
       transaction.setModeUrl()
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
-
     })
 
   })
