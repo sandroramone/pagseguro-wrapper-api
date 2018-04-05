@@ -5,6 +5,8 @@
 
 A wrapper to work with the [PagSeguro Api](https://dev.pagseguro.uol.com.br/referencia-da-api/api-de-pagamentos-pagseguro).
 
+Project in progress, is not ready.
+
 ## Documentation
 
 documentation is in the directory ./Documentation in format html and [here Markdown](./DOCUMENTATION.md).
