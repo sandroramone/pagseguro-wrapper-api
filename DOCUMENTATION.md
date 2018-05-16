@@ -23,6 +23,16 @@
 <dl>
 <dt><a href="#item">item</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#phone">phone</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#document">document</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#sender">sender</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#address">address</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#shipping">shipping</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="module_normalizeArrayAndObject"></a>
@@ -123,6 +133,7 @@ class Transaction represent the transaction pagseguro api endpoint
     * [.setReference(reference)](#Transaction+setReference)
     * [.setCurrency(currency)](#Transaction+setCurrency)
     * [.setNotificationUrl(url)](#Transaction+setNotificationUrl)
+    * [.setPaymentMethod(method)](#Transaction+setPaymentMethod)
 
 <a name="new_Transaction_new"></a>
 
@@ -137,8 +148,7 @@ class Transaction represent the transaction pagseguro api endpoint
 <a name="Transaction+setUrlVersion"></a>
 
 ### transaction.setUrlVersion([v])
-setUrl
-set url for requisition in pagseguro api
+setUrl set url for requisition in pagseguro api
 
 **Kind**: instance method of [<code>Transaction</code>](#Transaction)  
 
@@ -195,7 +205,7 @@ setSender
 
 | Param | Type | Description |
 | --- | --- | --- |
-| sender | <code>Object</code> | representing a buyer |
+| sender | [<code>sender</code>](#sender) | representing a buyer |
 
 <a name="Transaction+setShipping"></a>
 
@@ -206,7 +216,7 @@ setShipping
 
 | Param | Type | Description |
 | --- | --- | --- |
-| shipping | <code>Object</code> | is a shipping of transaction |
+| shipping | [<code>shipping</code>](#shipping) | is a shipping of transaction |
 
 <a name="Transaction+setReference"></a>
 
@@ -217,7 +227,7 @@ setReference
 
 | Param | Type | Description |
 | --- | --- | --- |
-| reference | <code>string</code> | is a reference of transaction |
+| reference | <code>string</code> | is a reference of transaction in your database, useful for link your transaction of your system with pagseguro, set reference is optional |
 
 <a name="Transaction+setCurrency"></a>
 
@@ -228,7 +238,7 @@ setCurrency
 
 | Param | Type | Description |
 | --- | --- | --- |
-| currency | <code>string</code> | is a symbol monetary, example Brazil id 'BRL' |
+| currency | <code>string</code> | is a symbol monetary, a unique option is 'BRL' Real of Brazil |
 
 <a name="Transaction+setNotificationUrl"></a>
 
@@ -239,7 +249,18 @@ setNotificationUrl
 
 | Param | Type | Description |
 | --- | --- | --- |
-| url | <code>string</code> | is your url for received notification of trasaction |
+| url | <code>string</code> | is your url for received notification of trasaction, set url for notification is optional |
+
+<a name="Transaction+setPaymentMethod"></a>
+
+### transaction.setPaymentMethod(method)
+setPaymentMethod
+
+**Kind**: instance method of [<code>Transaction</code>](#Transaction)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| method | <code>string</code> | is a payment method, valid value is 'creditCard', 'boleto' and 'eft'(debit in bank account) |
 
 <a name="item"></a>
 
@@ -253,4 +274,72 @@ setNotificationUrl
 | description | <code>string</code> | description of item |
 | amount | <code>string</code> | unity cost |
 | quantity | <code>number</code> | unity quantity |
+
+<a name="phone"></a>
+
+## phone : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| areaCode | <code>string</code> | DDD of buyer, 2 digits |
+| number | <code>string</code> | number of phone, of 7 to 9 digits |
+
+<a name="document"></a>
+
+## document : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | values valid is 'CPF' or 'CNPJ' |
+| value | <code>string</code> | number of CPF or CNPJ, depending on the previous value |
+
+<a name="sender"></a>
+
+## sender : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| hash | <code>string</code> | vendor indentification (fingerprint), is generated with pagseguro javascript in web browser |
+| [ip] | <code>string</code> | IP of buyer, optional property |
+| [phone] | [<code>phone</code>](#phone) | phone of buyer, optional property |
+| [email] | <code>string</code> | email of buyer, optional property |
+| [documents] | [<code>document</code>](#document) | documents of buyer, optional property depending of payment mode |
+| [bornDate] | <code>string</code> | born date of buyer, format: dd/MM/yyyy, optional property |
+| [name] | <code>string</code> | minimum two sequence of letters, optional property |
+
+<a name="address"></a>
+
+## address : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [street] | <code>string</code> | length limit 80 |
+| [number] | <code>string</code> | length limit 20 |
+| [complement] | <code>string</code> | length limit 40 |
+| [district] | <code>string</code> | length limit 60 |
+| [city] | <code>string</code> | length limit min 2 and max 60, required a valid Brazil cities name |
+| [state] | <code>string</code> | Two letters representing a Brazil state |
+| [country] | <code>string</code> | at the moment only value 'BRA' is valid |
+| [postalCode] | <code>string</code> | an eigth-digit numer containing a zip code(CEP) from Brazil |
+
+<a name="shipping"></a>
+
+## shipping : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [address] | [<code>address</code>](#address) | is optional |
+| [type] | <code>number</code> | reference type of freight, are valid values: 1 is a order type PAC of Correios | 2 is a order type Sedex of Correios | 3 is a order type not specified | is a optional property |
+| [cost] | <code>string</code> | Value of freight, format: decimal > 0.00 and  < 9999999.00, is a optional property |
+| [addressRequired] | <code>string</code> | inform if required address to make delivery, values valid is true, false and null, is optional property |
 

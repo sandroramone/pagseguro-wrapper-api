@@ -146,32 +146,47 @@ describe('Transaction Library', () => {
     it('should set url vresion correct', () => {
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
-      
+
       transaction.setUrlVersion('v3')
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v3/')
-      
+
       transaction.setUrlVersion()
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
-      
+
       transaction.setModeUrl('production')
       expect(transaction.url).to.be
         .equal('https://ws.pagseguro.uol.com.br/v2/')
-      
+
       transaction.setUrlVersion('v3')
       expect(transaction.url).to.be
-        .equal('https://ws.pagseguro.uol.com.br/v3/') 
+        .equal('https://ws.pagseguro.uol.com.br/v3/')
     })
 
     it('should trade mode url', () => {
       transaction.setModeUrl('production')
       expect(transaction.url).to.be
         .equal('https://ws.pagseguro.uol.com.br/v2/')
-      
+
       transaction.setModeUrl()
       expect(transaction.url).to.be
         .equal('https://ws.sandbox.pagseguro.uol.com.br/v2/')
+    })
+
+    it('should set payment method', () => {
+      transaction.setPaymentMethod('creditCard')
+      expect(transaction.transaction.method).to.be.equal('creditCard')
+
+      transaction.setPaymentMethod('boleto')
+      expect(transaction.transaction.method).to.be.equal('boleto')
+
+      transaction.setPaymentMethod('eft')
+      expect(transaction.transaction.method).to.be.equal('eft')
+    })
+
+    it('should set a creditCard for payment', () => {
+      // transaction.setCreditCard()
     })
 
   })
